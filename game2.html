@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><u>Number Guessing Game</u></title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            background: rgb(185, 132, 32);
+            padding: 50px;
+        }
+
+        .game {
+            background: white;
+            padding: 30px;
+            width: 300px;
+            margin: auto;
+            border-radius: 15px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="game">
+    <h2>Number Guessing Game.</h2>
+
+    <p>Guess a number between 1 and 30.</p>
+
+    <input type="number" id="guess" placeholder="Enter number">
+
+    <br>
+
+    <button onclick="checkGuess()">Check</button>
+
+    <p id="result">Good luck trying!</p>
+
+    <p id="attempts">Attempts: 0</p>
+
+    <button onclick="restart()">Restart Game</button>
+</div>
+
+<script>
+    let randomNumber = Math.floor(Math.random() * 30) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+        let guess = Number(document.getElementById("guess").value);
+
+        if (guess < 1 || guess > 30 || guess === 0) {
+            document.getElementById("result").innerHTML =
+                "Enter a number between 1 and 30!";
+            return;
+        }
+
+        attempts++;
+
+        if (guess === randomNumber) {
+            document.getElementById("result").innerHTML =
+                "Congratulations! You won!";
+        }
+        else if (guess < randomNumber) {
+            document.getElementById("result").innerHTML =
+                "Number too low! Try again.";
+        }
+        else {
+            document.getElementById("result").innerHTML =
+                "Number too high! Try again.";
+        }
+
+        document.getElementById("attempts").innerHTML =
+            "Attempts: " + attempts;
+    }
+
+    function restart() {
+        randomNumber = Math.floor(Math.random() * 30) + 1;
+        attempts = 0;
+
+        document.getElementById("guess").value = "";
+        document.getElementById("result").innerHTML = "New game started!";
+        document.getElementById("attempts").innerHTML = "Attempts: 0";
+    }
+</script>
+
+</body>
+</html>
